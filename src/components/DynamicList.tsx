@@ -33,13 +33,13 @@ export const DynamicList = forwardRef<VariableSizeList, ListProps>(
 );
 DynamicList.displayName = "DynamicList";
 
-interface RowProps<T> {
-  item: React.FC<T>;
+interface RowProps {
+  item: React.JSX.Element;
   index: number;
   setRowHeight: (index: number, height: number) => void;
 }
 
-export const Row: React.FC<RowProps<unknown>> = (
+export const Row: React.FC<RowProps> = (
   { item, index, setRowHeight },
   style
 ) => {
@@ -56,6 +56,6 @@ export const Row: React.FC<RowProps<unknown>> = (
     measureAndSet();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rowRef]);
-
-  return item({ ref: rowRef, style: style });
+  
+  return <div ref={rowRef} style={style}>{item}</div>;
 };

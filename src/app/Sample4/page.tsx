@@ -6,6 +6,8 @@ import { VariableSizeList } from "react-window";
 
 import { variableSizeData } from "../data/sample-data";
 
+const data = variableSizeData(1000);
+
 const Row = ({
   index,
   style,
@@ -16,13 +18,13 @@ const Row = ({
   const Item = ({ item }: { item: React.JSX.Element }) => <>{item}</>; // 仮のItemコンポーネントを定義
   return (
     <div style={style}>
-      <Item item={variableSizeData[index]()} />
+      <Item item={data[index]} />
     </div>
   );
 };
 
 const getItemSize = (index: number) => {
-  const element = variableSizeData[index]();
+  const element = data[index];
   return parseInt(element.props.className.replace("h-", ""), 10) * 4;
 };
 
@@ -30,7 +32,7 @@ const Sample4 = () => (
   <VariableSizeList
     height={500}
     width={500}
-    itemCount={variableSizeData.length}
+    itemCount={data.length}
     itemSize={getItemSize}
   >
     {Row}

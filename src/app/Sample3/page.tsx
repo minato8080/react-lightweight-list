@@ -2,12 +2,11 @@
 
 import { FixedSizeList } from "react-window";
 
-import { Row } from "../components/DynamicList";
+import { Row } from "../../components/DynamicList";
 import { fixedSizeData } from "../data/sample-data";
 
-
 export default function Sample3() {
-  const data = fixedSizeData(500);
+  const data = fixedSizeData(500, 100);
 
   return (
     <div className="App">

@@ -11,25 +11,28 @@ function Item({ item }: { item: React.JSX.Element }) {
 }
 
 function MyList() {
+  const data = variableSizeData(100);
   const getItemSize = (index: number) => {
-    const element = variableSizeData[index]();
+    const element = data[index];
     return parseInt(element.props.className.replace("h-", ""), 10) * 4;
   };
 
-  const totalHeight = variableSizeData.reduce((sum, item) => {
-    const element = item();
-    return sum + parseInt(element.props.className.replace("h-", ""), 10) * 4;
+  const totalHeight = data.reduce((sum, item) => {
+    return sum + parseInt(item.props.className.replace("h-", ""), 10) * 4;
   }, 0);
 
   return (
-    <div style={{ height: "calc(100vh - 90px - 100px)" }} className="overflow-hidden">
+    <div
+      style={{ height: "calc(100vh - 90px - 100px)" }}
+      className="overflow-hidden"
+    >
       <VariableSizeList
         height={90 + totalHeight}
-        itemCount={variableSizeData.length}
+        itemCount={data.length}
         itemSize={getItemSize}
         width={1000}
       >
-        {({ index }) => <Item item={variableSizeData[index]()} />}
+        {({ index }) => <Item item={data[index]} />}
       </VariableSizeList>
     </div>
   );
